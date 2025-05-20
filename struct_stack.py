@@ -28,3 +28,29 @@ class Stack:
             print(current.data, end=" -> ")
             current = current.next
         print("None")
+
+    def to_array(self):
+        arr = []
+        current = self.top
+        while current:
+            arr.append(current.data)
+            current = current.next
+        return arr
+
+    def sort_stack(self):
+        temp_stack = Stack()
+
+        while not self.is_empty():
+            # Step 1: Pop element from original stack
+            tmp = self.pop()
+
+            # Step 2: Move elements back to original if they are bigger than tmp
+            while not temp_stack.is_empty() and temp_stack.peek() < tmp:
+                self.push(temp_stack.pop())
+
+            # Step 3: Push tmp to temp_stack
+            temp_stack.push(tmp)
+
+        # Step 4: Copy back from temp_stack to self to preserve ascending order
+        while not temp_stack.is_empty():
+            self.push(temp_stack.pop())
