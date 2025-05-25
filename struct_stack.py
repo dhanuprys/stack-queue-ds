@@ -25,9 +25,11 @@ class Stack:
     def print_stack(self):
         current = self.top
         while current:
-            print(current.data, end=" -> ")
+            print(current.data, end="")
+            if current.next:
+                print(" -> ", end="")
             current = current.next
-        print("None")
+        print()
 
     def to_array(self):
         arr = []
@@ -45,7 +47,7 @@ class Stack:
             tmp = self.pop()
 
             # Step 2: Move elements back to original if they are bigger than tmp
-            while not temp_stack.is_empty() and temp_stack.peek() < tmp:
+            while not temp_stack.is_empty() and temp_stack.peek() > tmp:
                 self.push(temp_stack.pop())
 
             # Step 3: Push tmp to temp_stack

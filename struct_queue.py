@@ -27,12 +27,17 @@ class Queue:
     def first(self) -> Optional[int]:
         return self.head.data if self.head else None
 
+    def last(self) -> Optional[int]:
+        return self.tail.data if self.tail else None
+
     def is_empty(self) -> bool:
         return self.head is None
 
     def print_queue(self):
         current = self.head
         while current:
-            print(current.data, end=" -> ")
+            print(current.data, end="")
+            if current.next:
+                print(" -> ", end="")
             current = current.next
-        print("None")
+        print()

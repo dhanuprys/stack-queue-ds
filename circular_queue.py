@@ -2,14 +2,14 @@ class CircularQueue:
     def __init__(self, capacity):
         self.queue = [None] * capacity
         self.capacity = capacity
-        self.front = -1
-        self.rear = -1
+        self.head = -1
+        self.tail = -1
 
     def is_empty(self):
-        return self.front == -1
+        return self.head == -1
 
     def is_full(self):
-        return (self.rear + 1) % self.capacity == self.front
+        return (self.tail + 1) % self.capacity == self.head
 
     def enqueue(self, item):
         if self.is_full():
@@ -17,41 +17,47 @@ class CircularQueue:
             return
 
         if self.is_empty():
-            self.front = self.rear = 0
+            self.head = self.tail = 0
         else:
-            self.rear = (self.rear + 1) % self.capacity
+            self.tail = (self.tail + 1) % self.capacity
 
-        self.queue[self.rear] = item
+        self.queue[self.tail] = item
 
     def dequeue(self):
         if self.is_empty():
             print("Queue is empty")
             return None
 
-        removed = self.queue[self.front]
-        if self.front == self.rear:  # Hanya satu elemen
-            self.front = self.rear = -1
+        removed = self.queue[self.head]
+        if self.head == self.tail:  # Hanya satu elemen
+            self.head = self.tail = -1
         else:
-            self.front = (self.front + 1) % self.capacity
+            self.head = (self.head + 1) % self.capacity
 
         return removed
 
-    def peek(self):
+    def first(self):
         if self.is_empty():
             print("Queue is empty")
             return None
-        return self.queue[self.front]
+        return self.queue[self.head]
 
-    def display(self):
+    def last(self):
+        if self.is_empty():
+            print("Queue is empty")
+            return None
+        return self.queue[self.last]
+
+    def print_circular_queue(self):
         if self.is_empty():
             print("Queue is empty")
             return
 
-        index = self.front
-        print("Queue contents:", end=" ")
+        index = self.head
         while True:
-            print(self.queue[index], end=" ")
-            if index == self.rear:
+            print(self.queue[index], end="")
+            if index == self.tail:
                 break
+            print(" -> ", end="")
             index = (index + 1) % self.capacity
         print()
