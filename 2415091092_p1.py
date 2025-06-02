@@ -1,7 +1,7 @@
 from typing import List
 from struct_stack import Stack
 
-def insert_reversed_unique_item(stack: Stack, items: List[int]) -> None:
+def insert_unique_item(stack: Stack, items: List[int]) -> None:
     """
     Menambahkan data non-duplikat ke dalam stack.
 
@@ -64,10 +64,7 @@ def simulate_stack(items: List[int]) -> None:
     stack = Stack()
     
     # Memasukkan data ke dalam stack dan memfilter data duplikat
-    insert_reversed_unique_item(
-        stack=stack,
-        items=items
-    )
+    insert_unique_item(stack=stack, items=items)
     
     # Sorting stack secara ascending
     stack.sort_stack()
